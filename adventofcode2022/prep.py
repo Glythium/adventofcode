@@ -7,15 +7,13 @@ from solutions.day02.scoreRPS import scoreRPS
 
 
 def solveDay01():
-    inputFile = "inputs/calories.txt"
-    calList = getAdventInput(inputFile)
+    calList = getAdventInput("inputs/calories.txt")
     
     return countCalories(calList), sumTopThreeCalories(calList)
 
 
 def solveDay02():
-    inputFile = "inputs/rps-strategy-guide.txt"
-    rpsList = getAdventInput(inputFile)
+    rpsList = getAdventInput("inputs/rps-strategy-guide.txt")
 
     return scoreRPS(rpsList)
 
