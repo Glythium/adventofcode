@@ -7,48 +7,42 @@ def splitCompartments(line):
     # Have to int() this because Python wants to give floats during division
     halfLen = int(len(line) / 2)
 
-    return line[:halfLen], line[halfLen:]
+    # Returns a list containing two halves of a string
+    return [line[:halfLen], line[halfLen:]]
 
 
-def sortUpperLower(letters):
-    lower = []
-    upper = []
+def findRepeat(stringList):
+    if len(stringList) < 2:
+        print("Can't find repeats with only one string!")
+        return ''
 
-    for c in letters.strip():
-        if c.islower():
-            lower.append(c)
-        else:
-            upper.append(c)
+    repeatChar = ''
 
-    lower.sort()
-    upper.sort()
-    return lower, upper
+    # Finds a character that exists across all strings in a list
+    for character in stringList[0]:
+        for otherString in stringList[1:]:
+            if character in otherString:
+                repeatChar = character
+            else:
+                # This is not the character you're looking for
+                repeatChar = ''
+                break
 
+        if repeatChar != '':
+            # We found the character that exists in all other strings
+            break
 
-def findDuplicate(left, right):
-    # There's absolutely a better way to do this
-    for c in left:
-        if c in right:
-            return c
-
-    # Returning the empty string on failure
-    return ''
-
-
-def findBadge(first, second, third):
-    # Really making me want to refactor this and findDuplicate
-    # to create a function that searches through a list of lists
-    for c in first:
-        if c in second and c in third:
-            return c
-
-    # Returning the empty string on failure
-    return ''
+    # Expect the empty string on failure
+    return repeatChar
 
 
 def calculatePriority(duplicateChar):
+    # The ASCII value of ('a' - LOWERCASE_OFFSET) = 1
     LOWERCASE_OFFSET = 96
+
+    # The ASCII value of ('A' - UPPERCASE_OFFSET) = 27
     UPPERCASE_OFFSET = 38
+
     offset = 0
 
     if duplicateChar.islower():
@@ -59,6 +53,7 @@ def calculatePriority(duplicateChar):
         print("The duplicate character was not upper/lower cased!")
         sys.exit(1)
 
+    # ord(X) returns the ASCII value of a given character
     return ord(duplicateChar) - offset
 
 
@@ -66,21 +61,10 @@ def partOne(ruckList):
     totalPriority = 0
 
     for line in ruckList:
-        left, right = splitCompartments(line)
-        lowerL, upperL = sortUpperLower(left)
-        lowerR, upperR = sortUpperLower(right)
-
-        duplicateChar = ''
-        # Two function calls to keep the findDuplicate function more generic;
-        # operating against two strings instead of a function requiring four
-        # strings which seems very specific.
-        duplicateChar = findDuplicate(lowerL, lowerR)
+        duplicateChar = findRepeat(splitCompartments(line))
         if duplicateChar == '':
-            duplicateChar = findDuplicate(upperL, upperR)
-            if duplicateChar == '':
-                # Something went horribly wrong
-                print("No duplicate character found!")
-                sys.exit(1)
+            print("No duplicate character found!")
+            sys.exit(1)
 
         totalPriority += calculatePriority(duplicateChar)
 
@@ -93,16 +77,13 @@ def partTwo(ruckList):
 
     # Absolutely a better way to grab three lines
     count = 0
-    groupsOfThree = []
+    groupOfThree = []
     for line in ruckList:
         # Fill the buffer list with three strings
-        groupsOfThree.append(line.strip())
+        groupOfThree.append(line.strip())
         count += 1
         if count == 3:
-            # Unpacking for readable vars beyond just indexing the list
-            first, second, third = groupsOfThree
-
-            duplicateChar = findBadge(first, second, third)
+            duplicateChar = findRepeat(groupOfThree)
             if duplicateChar == '':
                 print("No duplicate char found!")
                 sys.exit(1)
@@ -110,12 +91,12 @@ def partTwo(ruckList):
             totalPriority += calculatePriority(duplicateChar)
 
             # Reset the count and buffer list to get ready for the next three
-            groupsOfThree = []
+            groupOfThree = []
             count = 0
 
     return totalPriority
 
-
+# Day 3: (7848, 2616)
 def checkRucks(ruckList):
     return partOne(ruckList), partTwo(ruckList)
 
