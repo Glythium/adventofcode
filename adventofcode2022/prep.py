@@ -8,7 +8,7 @@ from solutions.day02.scoreRPS import playRPS, fixRPS
 
 def solveDay01():
     calList = getAdventInput("inputs/calories.txt")
-    
+
     return countCalories(calList), sumTopThreeCalories(calList)
 
 

@@ -45,7 +45,7 @@ def playRPS(rpsList):
     for line in rpsList:
         opp, you = line.split()
         totalScore += scoreRPS(opp, you)
-    
+
     return totalScore
 
 
@@ -57,7 +57,7 @@ def fixRPS(rpsList):
     for line in rpsList:
         opp, you = line.split()
         curIndex = oppMoves.index(opp)
-        
+
         if you == 'X':
             # Pick a loser
             loseIndex = (curIndex - 1) % 3
