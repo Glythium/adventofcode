@@ -4,7 +4,7 @@
 def countCalories(calList):
     curCals = 0
     maxCals = 0
-    
+
     for line in calList:
         item = line.strip()
         if item == "":
@@ -13,7 +13,7 @@ def countCalories(calList):
             curCals = 0
             continue
         curCals += int(item)
-    
+
     return maxCals
 
 

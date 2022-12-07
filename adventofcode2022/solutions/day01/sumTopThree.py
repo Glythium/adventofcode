@@ -13,13 +13,13 @@ def sumTopThreeCalories(calList):
             curCals = 0
             continue
         curCals += int(item)
-    
+
     totalCals.sort()
     topThree = totalCals[-3:]
 
     for i in topThree:
         sumCals += i
-    
+
     return sumCals
 
 
