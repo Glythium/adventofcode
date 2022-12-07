@@ -3,10 +3,12 @@
 import sys
 
 
+ROCK = 1
+PAPER = 2
+SCISSORS = 3
+
+
 def scoreRPS(opp, you):
-    ROCK = 1
-    PAPER = 2
-    SCISSORS = 3
     LOSE = 0
     DRAW = 3
     WIN = 6
@@ -46,6 +48,31 @@ def playRPS(rpsList):
     
     return totalScore
 
+
+def fixRPS(rpsList):
+    totalScore = 0
+    oppMoves = ['A', 'B', 'C']
+    yourMoves = ['X', 'Y', 'Z']
+
+    for line in rpsList:
+        opp, you = line.split()
+        curIndex = oppMoves.index(opp)
+        
+        if you == 'X':
+            # Pick a loser
+            loseIndex = (curIndex - 1) % 3
+            you = yourMoves[loseIndex]
+        elif you == 'Y':
+            # Pick a draw
+            you = yourMoves[curIndex]
+        else:
+            # Pick a winrar
+            winIndex = (curIndex + 1) % 3
+            you = yourMoves[winIndex]
+
+        totalScore += scoreRPS(opp, you)
+
+    return totalScore
 
 
 if __name__ == "__main__":

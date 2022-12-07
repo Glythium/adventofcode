@@ -3,7 +3,7 @@
 from helpers import getAdventInput
 from solutions.day01.countCalories import countCalories
 from solutions.day01.sumTopThree import sumTopThreeCalories
-from solutions.day02.scoreRPS import playRPS
+from solutions.day02.scoreRPS import playRPS, fixRPS
 
 
 def solveDay01():
@@ -15,7 +15,7 @@ def solveDay01():
 def solveDay02():
     rpsList = getAdventInput("inputs/rps-strategy-guide.txt")
 
-    return playRPS(rpsList)
+    return playRPS(rpsList), fixRPS(rpsList)
 
 
 if __name__ == "__main__":
