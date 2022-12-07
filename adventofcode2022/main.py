@@ -15,7 +15,8 @@ def main():
     solutions = {
         "0": usage,
         "1": prep.solveDay01,
-        "2": prep.solveDay02
+        "2": prep.solveDay02,
+        "3": prep.solveDay03
     }
 
     parser = argparse.ArgumentParser(description='Advent of Code 2022 solver!')
@@ -25,7 +26,7 @@ def main():
                         help='The day you want the solution for. Example: -d <1|10|31>')
 
     args = parser.parse_args()
-    
+
     try:
         day = str(args.day)
         answer = solutions[day]()
