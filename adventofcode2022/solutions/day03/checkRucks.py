@@ -96,7 +96,7 @@ def partTwo(ruckList):
 
     return totalPriority
 
-# Day 3: (7848, 2616)
+
 def checkRucks(ruckList):
     return partOne(ruckList), partTwo(ruckList)
 
