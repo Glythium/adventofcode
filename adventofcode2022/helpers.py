@@ -10,7 +10,7 @@ def getAdventInput(inputFile):
     except FileNotFoundError:
         print("Could not find file {}".format(inputFile))
         return None
-    
+
     return lines
 
 
