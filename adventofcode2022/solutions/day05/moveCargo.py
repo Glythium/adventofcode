@@ -34,6 +34,7 @@ def makeMoves(cargoDict, cargoInput, moveFunc):
     for line in cargoInput[lineBreak + 1::]:
         # We just need the numbers here
         numberMoved, sourceColumn, destColumn = line.split()[1::2]
+
         # Call the function we passed in to move it the desired way
         cargoDict = moveFunc(cargoDict, int(numberMoved), int(sourceColumn), int(destColumn))
 
@@ -72,8 +73,15 @@ def finalCargo(cargoDict):
 
 def moveCargo(cargoInput):
     cargoDict = setupCargo(cargoInput)
+
+    # We need a second dict here because we manipulate the original
+    # during the execution of the moves
     cargoDictTwo = setupCargo(cargoInput)
+
+    # Move the cargo using the first set of rules
     movedCargoDict = makeMoves(cargoDict, cargoInput, restackCargo)
+
+    # Move the cargo using the second set of rules
     movedCargoDictTwo = makeMoves(cargoDictTwo, cargoInput, megaRestackCargo)
 
     return finalCargo(movedCargoDict), finalCargo(movedCargoDictTwo)
