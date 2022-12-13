@@ -22,7 +22,8 @@ def main():
         "2": solveDay02,
         "3": solveDay03,
         "4": solveDay04,
-        "5": solveDay05
+        "5": solveDay05,
+        "6": usage
     }
 
     parser = argparse.ArgumentParser(description='Advent of Code 2022 solver!')
@@ -38,9 +39,9 @@ def main():
         answer = solutions[day]()
         if answer is not None:
             print("Day {}: {}".format(day, answer))
-    except KeyError:
-        print("That day has not been solved!")
-
+    except KeyError as ex:
+        print("That day ({}) has not been solved!".format(ex))
+        raise ex
 
 if __name__ == '__main__':
     main()

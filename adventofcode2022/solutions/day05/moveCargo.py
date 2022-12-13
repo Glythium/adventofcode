@@ -22,19 +22,11 @@ def setupCargo(cargoInput):
                 if letter != " ":
                     # Index is offset by 1
                     cargoDict[j + 1].append(letter)
-    
+
     return cargoDict
 
 
-def restackCargo(cargoDict, numberMoved, sourceColumn, destColumn):
-    for i in numberMoved:
-        buffer = cargoDict[sourceColumn].pop()
-        cargoDict[destColumn].append(buffer)
-    
-    return cargoDict
-
-
-def makeMoves(cargoDict, cargoInput):
+def makeMoves(cargoDict, cargoInput, moveFunc):
     # Let's find the line separating the cargo from the moves
     lineBreak = cargoInput.index("\n")
 
@@ -42,24 +34,49 @@ def makeMoves(cargoDict, cargoInput):
     for line in cargoInput[lineBreak + 1::]:
         # We just need the numbers here
         numberMoved, sourceColumn, destColumn = line.split()[1::2]
-        cargoDict = restackCargo(cargoDict, numberMoved, sourceColumn, destColumn)
-    
+        # Call the function we passed in to move it the desired way
+        cargoDict = moveFunc(cargoDict, int(numberMoved), int(sourceColumn), int(destColumn))
+
+    return cargoDict
+
+
+def restackCargo(cargoDict, numberMoved, sourceColumn, destColumn):
+    for i in range(numberMoved):
+        buffer = cargoDict[sourceColumn].pop()
+        cargoDict[destColumn].append(buffer)
+
+    return cargoDict
+
+
+def megaRestackCargo(cargoDict, numberMoved, sourceColumn, destColumn):
+    # We can grab the whole section to be moved
+    # This also keeps it in the correct order
+    buffer = cargoDict[sourceColumn][numberMoved * -1::]
+
+    for letter in buffer:
+        cargoDict[destColumn].append(letter)
+        cargoDict[sourceColumn].pop()
+
     return cargoDict
 
 
 def finalCargo(cargoDict):
     letters = ""
-    for i in len(cargoDict):
+
+    # Build our string using by concatenating the last letter from each list
+    for i in cargoDict:
         letters += cargoDict[i][-1]
-    
+
     return letters
 
 
 def moveCargo(cargoInput):
     cargoDict = setupCargo(cargoInput)
-    movedCargoDict = makeMoves(cargoDict, cargoInput)
+    cargoDictTwo = setupCargo(cargoInput)
+    movedCargoDict = makeMoves(cargoDict, cargoInput, restackCargo)
+    movedCargoDictTwo = makeMoves(cargoDictTwo, cargoInput, megaRestackCargo)
 
-    return finalCargo(movedCargoDict)
+    return finalCargo(movedCargoDict), finalCargo(movedCargoDictTwo)
 
 
 if __name__ == "__main__":
