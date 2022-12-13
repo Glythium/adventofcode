@@ -17,7 +17,8 @@ def main():
         "1": prep.solveDay01,
         "2": prep.solveDay02,
         "3": prep.solveDay03,
-        "4": prep.solveDay04
+        "4": prep.solveDay04,
+        "5": prep.solveDay05
     }
 
     parser = argparse.ArgumentParser(description='Advent of Code 2022 solver!')

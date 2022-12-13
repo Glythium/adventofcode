@@ -6,6 +6,7 @@ from solutions.day01.sumTopThree import sumTopThreeCalories
 from solutions.day02.scoreRPS import playRPS, fixRPS
 from solutions.day03.checkRucks import checkRucks
 from solutions.day04.dedupeAssignments import dedupeAssignments
+from solutions.day05.moveCargo import moveCargo
 
 
 def solveDay01():
@@ -30,6 +31,12 @@ def solveDay04():
     cleanupAssignments = getAdventInput("inputs/cleanup-assignments.txt")
 
     return dedupeAssignments(cleanupAssignments)
+
+
+def solveDay05():
+    cargoInput = getAdventInput("inputs/cargo-setup.txt")
+
+    return moveCargo(cargoInput)
 
 
 if __name__ == "__main__":
