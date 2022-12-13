@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from helpers import getAdventInput
+from .helpers import getAdventInput
 from solutions.day01.countCalories import countCalories
 from solutions.day01.sumTopThree import sumTopThreeCalories
 from solutions.day02.scoreRPS import playRPS, fixRPS

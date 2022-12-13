@@ -4,7 +4,11 @@
 import argparse
 
 
-import prep
+from lib.prep import solveDay01
+from lib.prep import solveDay02
+from lib.prep import solveDay03
+from lib.prep import solveDay04
+from lib.prep import solveDay05
 
 
 def usage():
@@ -14,11 +18,11 @@ def usage():
 def main():
     solutions = {
         "0": usage,
-        "1": prep.solveDay01,
-        "2": prep.solveDay02,
-        "3": prep.solveDay03,
-        "4": prep.solveDay04,
-        "5": prep.solveDay05
+        "1": solveDay01,
+        "2": solveDay02,
+        "3": solveDay03,
+        "4": solveDay04,
+        "5": solveDay05
     }
 
     parser = argparse.ArgumentParser(description='Advent of Code 2022 solver!')
