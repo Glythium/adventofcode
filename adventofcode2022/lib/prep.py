@@ -7,6 +7,7 @@ from solutions.day02.scoreRPS import playRPS, fixRPS
 from solutions.day03.checkRucks import checkRucks
 from solutions.day04.dedupeAssignments import dedupeAssignments
 from solutions.day05.moveCargo import moveCargo
+from solutions.day06.parseDatastream import parseDatastream
 
 
 def solveDay01():
@@ -37,6 +38,12 @@ def solveDay05():
     cargoInput = getAdventInput("inputs/cargo-setup.txt")
 
     return moveCargo(cargoInput)
+
+
+def solveDay06():
+    datastream = getAdventInput("inputs/packet-datastream.txt")
+
+    return parseDatastream(datastream)
 
 
 if __name__ == "__main__":
