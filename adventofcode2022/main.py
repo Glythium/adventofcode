@@ -43,5 +43,6 @@ def main():
         if answer is not None:
             print(f"Day {day}: {answer}")
 
+
 if __name__ == '__main__':
     main()
